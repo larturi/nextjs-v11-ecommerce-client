@@ -45,12 +45,12 @@
         border-radius: 0;
         color: $primary !important;
         padding: 5px 0 !important;
-        width: 250px;
+        width: 200px;
         font-size: 20px;
         transition: width 0.7s;
 
         &:focus {
-          width: 350px
+          width: 250px
         }
       }
 
