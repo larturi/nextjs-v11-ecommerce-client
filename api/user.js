@@ -1,3 +1,5 @@
+import { authFetch } from '../utils/fetch';
+
 export const registerApi = async (formData) => {
    try {
       const url = `${process.env.NEXT_PUBLIC_BASE_PATH}/auth/local/register`;
@@ -54,6 +56,16 @@ export const resetPasswordApi = async (email) => {
       return result;
    } catch (error) {
       console.error(error);
+      return null;
+   }
+};
+
+export const getMeApi = async (logout) => {
+   try {
+      const url = `${process.env.NEXT_PUBLIC_BASE_PATH}/users/me`;
+      const result = await authFetch(url, null, logout);
+      return result ? result : null;
+   } catch (error) {
       return null;
    }
 };

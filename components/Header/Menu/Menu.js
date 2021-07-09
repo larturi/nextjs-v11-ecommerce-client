@@ -1,17 +1,27 @@
 /* eslint-disable @next/next/link-passhref */
 
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Menu, Grid, Icon, Label } from 'semantic-ui-react';
 import Link from 'next/link';
 
 import BasicModal from '../../Modal/BasicModal/BasicModal';
 import Auth from '../../Auth';
 import useAuth from '../../../hooks/useAuth';
+import { getMeApi } from '../../../api/user';
 
 const MenuHeader = () => {
    const [showModal, setShowModal] = useState(false);
    const [titleModal, setTitleModal] = useState('Iniciar Sesión');
+   const [user, setUser] = useState(undefined);
+
    const { auth, logout } = useAuth();
+
+   useEffect(() => {
+      (async () => {
+         const response = await getMeApi(logout);
+         setUser(response);
+      })();
+   }, [auth]);
 
    const onShowModal = () => setShowModal(true);
    const onCloseModal = () => setShowModal(false);

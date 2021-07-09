@@ -25,7 +25,6 @@ const LoginForm = (props) => {
          } else {
             toast.error('Email y/o contraseña incorrectos');
          }
-
          setLoading(false);
       },
    });
