@@ -40,6 +40,26 @@
                 &.m-0 i {
                     margin: 0 !important;
                 }
+
+                @media only screen and (max-width: 767px) {
+                    i {
+                        margin: 0 !important;
+                        font-size: 14px;
+                    }
+                    padding: 10px;
+                }
+            }
+
+            .menu-item-text {
+                @media only screen and (max-width: 767px) {
+                  display: none;
+                }
+            }
+
+            .category-text {
+                @media only screen and (max-width: 767px) {
+                    display: none !important;
+                }
             }
         }
     }
@@ -48,8 +68,5 @@
         display: flex;
         justify-content: flex-end;
     }
-
-
-    
 
 }

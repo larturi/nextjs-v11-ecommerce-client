@@ -66,7 +66,9 @@ const MenuPlatforms = () => {
             <Menu.Item as='a'>Xbox</Menu.Item>
          </Link>
          <Link href='/nintendo'>
-            <Menu.Item as='a'>Nintendo</Menu.Item>
+            <Menu.Item as='a' className='category-text'>
+               Nintendo
+            </Menu.Item>
          </Link>
       </Menu>
    );
@@ -81,21 +83,21 @@ const MenuOptionsUser = (props) => {
                <Link href='/orders'>
                   <Menu.Item as='a'>
                      <Icon name='game' />
-                     Mis Pedidos
+                     <span className='menu-item-text'>Mis Pedidos</span>
                   </Menu.Item>
                </Link>
 
                <Link href='/whishlist'>
                   <Menu.Item as='a'>
                      <Icon name='heart outline' />
-                     Wishlist
+                     <span className='menu-item-text'>Wishlist</span>
                   </Menu.Item>
                </Link>
 
                <Link href='/account'>
                   <Menu.Item as='a'>
                      <Icon name='user outline' />
-                     {user.name}
+                     <span className='menu-item-text'>{user.name}</span>
                   </Menu.Item>
                </Link>
 

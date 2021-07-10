@@ -1,9 +1,6 @@
 // Colors
 @import './colors.scss';
 
-// Layouts
-@import '../layouts/BasicLayout/BasicLayout.scss';
-
 // Pages
 @import '../pages/account.scss';
 
@@ -13,3 +10,7 @@
 @import '../components/Header/Menu/Menu.scss';
 @import '../components/Modal/BasicModal/BasicModal.scss';
 @import '../components/Auth/LoginForm/LoginForm.scss';
+@import '../components/Account/ChangeNameForm/ChangeNameForm.scss';
+
+// Layouts
+@import '../layouts/BasicLayout/BasicLayout.scss';

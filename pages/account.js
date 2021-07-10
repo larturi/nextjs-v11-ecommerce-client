@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import BasicLayout from '../layouts/BasicLayout';
+import ChangeNameForm from '../components/Account/ChangeNameForm';
 import useAuth from '../hooks/useAuth';
 import { getMeApi } from '../api/user';
 
@@ -37,7 +38,9 @@ const Configuration = () => {
    return (
       <div className='account__configuration'>
          <div className='title'>Configuración</div>
-         <div className='data'>Formularios</div>
+         <div className='data'>
+            <ChangeNameForm />
+         </div>
       </div>
    );
 };
