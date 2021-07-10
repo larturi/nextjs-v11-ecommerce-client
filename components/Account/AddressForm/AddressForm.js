@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Dropdown } from 'semantic-ui-react';
 
-const provincias = [
-   { key: 'capitalfederal', text: 'Capital Federal', value: 'capitalfederal' },
-   { key: 'buenosaires', text: 'Buenos Aires', value: 'buenosaires' },
-   { key: 'cordoba', text: 'Córdoba', value: 'cordoba' },
-   { key: 'santafe', text: 'Santa Fe', value: 'santafe' },
-];
+import useAuth from '../../../hooks/useAuth';
+import { getProvinciasApi } from '../../../api/provincias';
 
 const AddressForm = () => {
+   const [provincias, setProvincias] = useState([
+      { key: '', text: '', value: '' },
+   ]);
+
+   const { logout } = useAuth();
+
+   useEffect(() => {
+      (async () => {
+         const response = await getProvinciasApi(logout);
+
+         const provinciasMap = response.map((provincia) => {
+            return {
+               key: provincia.id,
+               text: provincia.nombre,
+               value: provincia.id,
+            };
+         });
+         setProvincias(provinciasMap);
+      })();
+   }, []);
+
    return (
       <Form className='address-form'>
          <Form.Input
