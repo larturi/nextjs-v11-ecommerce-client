@@ -30,7 +30,7 @@ const ChangeNameForm = (props) => {
 
    return (
       <div className='change-name-form'>
-         <h4>Modificar mis datos</h4>
+         <h4>Modificar Nombre</h4>
          <Form onSubmit={formik.handleSubmit}>
             <Form.Group widths='equal'>
                <Form.Input

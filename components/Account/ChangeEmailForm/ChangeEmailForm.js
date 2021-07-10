@@ -36,7 +36,7 @@ const ChangeEmailForm = (props) => {
    return (
       <div className='change-email-form'>
          <h4>
-            Cambia tu email <span>(Tu email actual: {user.email})</span>
+            Modificar Email <span>(Tu email actual: {user.email})</span>
          </h4>
 
          <Form onSubmit={formik.handleSubmit}>

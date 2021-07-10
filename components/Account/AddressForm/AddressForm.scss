@@ -1,0 +1,13 @@
+.address-form {
+    .ui.selection.dropdown  {
+        padding: 13px !important;
+    }
+
+    button {
+        float: right;
+
+        @media only screen and (max-width: 767px) {
+            width: 100%;
+        }
+    }
+}
