@@ -8,15 +8,15 @@ import { getMeApi } from '../api/user';
 
 const Account = () => {
    const router = useRouter();
-   const { auth, logout } = useAuth();
+   const { auth, logout, setReloadUser } = useAuth();
    const [user, setUser] = useState(undefined);
 
    useEffect(() => {
       (async () => {
          const response = await getMeApi(logout);
-         setUser(user || null);
+         setUser(response || null);
       })();
-   }, [auth]);
+   }, [auth, logout]);
 
    if (user === undefined) return null;
 
@@ -27,19 +27,29 @@ const Account = () => {
 
    return (
       <BasicLayout className='account'>
-         <Configuration />
+         <Configuration
+            user={user}
+            logout={logout}
+            setReloadUser={setReloadUser}
+         />
       </BasicLayout>
    );
 };
 
 export default Account;
 
-const Configuration = () => {
+const Configuration = (props) => {
+   const { user, logout, setReloadUser } = props;
+
    return (
       <div className='account__configuration'>
          <div className='title'>Configuración</div>
          <div className='data'>
-            <ChangeNameForm />
+            <ChangeNameForm
+               user={user}
+               logout={logout}
+               setReloadUser={setReloadUser}
+            />
          </div>
       </div>
    );

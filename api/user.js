@@ -69,3 +69,23 @@ export const getMeApi = async (logout) => {
       return null;
    }
 };
+
+export const updateNameApi = async (idUser, data, logout) => {
+   try {
+      const url = `${process.env.NEXT_PUBLIC_BASE_PATH}/users/${idUser}`;
+
+      const params = {
+         method: 'PUT',
+         headers: {
+            'Content-Type': 'application/json',
+         },
+         body: JSON.stringify(data),
+      };
+
+      const result = await authFetch(url, params, logout);
+      return result ? result : null;
+   } catch (error) {
+      console.error(error);
+      return null;
+   }
+};
