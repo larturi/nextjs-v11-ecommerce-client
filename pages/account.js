@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import BasicLayout from '../layouts/BasicLayout';
 import ChangeNameForm from '../components/Account/ChangeNameForm';
 import ChangeEmailForm from '../components/Account/ChangeEmailForm';
+import ChangePasswordForm from '../components/Account/ChangePasswordForm';
 import useAuth from '../hooks/useAuth';
 import { getMeApi } from '../api/user';
 
@@ -52,6 +53,11 @@ const Configuration = (props) => {
                setReloadUser={setReloadUser}
             />
             <ChangeEmailForm
+               user={user}
+               logout={logout}
+               setReloadUser={setReloadUser}
+            />
+            <ChangePasswordForm
                user={user}
                logout={logout}
                setReloadUser={setReloadUser}

@@ -109,3 +109,23 @@ export const updateEmailApi = async (idUser, email, logout) => {
       return null;
    }
 };
+
+export const updatePasswordApi = async (idUser, password, logout) => {
+   try {
+      const url = `${process.env.NEXT_PUBLIC_BASE_PATH}/users/${idUser}`;
+
+      const params = {
+         method: 'PUT',
+         headers: {
+            'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({ password }),
+      };
+
+      const result = await authFetch(url, params, logout);
+      return result ? result : null;
+   } catch (error) {
+      console.error(error);
+      return null;
+   }
+};

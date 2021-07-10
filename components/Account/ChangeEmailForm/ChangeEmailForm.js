@@ -11,7 +11,7 @@ const ChangeEmailForm = (props) => {
    const [loading, setLoading] = useState(false);
 
    const formik = useFormik({
-      initialValues: initialValues(user),
+      initialValues: initialValues(),
       validationSchema: Yup.object(validationSchema()),
       onSubmit: async (formData) => {
          setLoading(true);
@@ -67,7 +67,7 @@ const ChangeEmailForm = (props) => {
 
 export default ChangeEmailForm;
 
-const initialValues = (user) => ({
+const initialValues = () => ({
    email: '',
    repeatEmail: '',
 });
