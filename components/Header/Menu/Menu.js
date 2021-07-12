@@ -3,16 +3,19 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Menu, Grid, Icon, Label } from 'semantic-ui-react';
 import Link from 'next/link';
+import { map } from 'lodash';
 
 import BasicModal from '../../Modal/BasicModal/BasicModal';
 import Auth from '../../Auth';
 import useAuth from '../../../hooks/useAuth';
 import { getMeApi } from '../../../api/user';
+import { getPlatformApi } from '../../../api/platform';
 
 const MenuHeader = () => {
    const [showModal, setShowModal] = useState(false);
    const [titleModal, setTitleModal] = useState('Iniciar Sesión');
    const [user, setUser] = useState(undefined);
+   const [platforms, setPlatforms] = useState([]);
 
    const { auth, logout } = useAuth();
 
@@ -21,7 +24,14 @@ const MenuHeader = () => {
          const response = await getMeApi(logout);
          setUser(response);
       })();
-   }, [auth]);
+   }, [auth, logout]);
+
+   useEffect(() => {
+      (async () => {
+         const response = await getPlatformApi();
+         setPlatforms(response || []);
+      })();
+   }, []);
 
    const onShowModal = () => setShowModal(true);
    const onCloseModal = () => setShowModal(false);
@@ -31,7 +41,7 @@ const MenuHeader = () => {
          <Container>
             <Grid>
                <Grid.Column className='menu__left' width={6}>
-                  <MenuPlatforms />
+                  <MenuPlatforms platforms={platforms} />
                </Grid.Column>
                <Grid.Column className='menu__right' width={10}>
                   {user !== undefined && (
@@ -56,20 +66,17 @@ const MenuHeader = () => {
    );
 };
 
-const MenuPlatforms = () => {
+const MenuPlatforms = (props) => {
+   const { platforms } = props;
    return (
       <Menu>
-         <Link href='/ps5'>
-            <Menu.Item as='a'>PS5</Menu.Item>
-         </Link>
-         <Link href='/xbox'>
-            <Menu.Item as='a'>Xbox</Menu.Item>
-         </Link>
-         <Link href='/nintendo'>
-            <Menu.Item as='a' className='category-text'>
-               Nintendo
-            </Menu.Item>
-         </Link>
+         {map(platforms, (platform) => (
+            <Link href={`/games/${platform.url}`} key={platform.id}>
+               <Menu.Item as='a' name={platform.url}>
+                  {platform.title}
+               </Menu.Item>
+            </Link>
+         ))}
       </Menu>
    );
 };
