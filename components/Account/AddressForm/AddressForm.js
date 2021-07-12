@@ -5,11 +5,11 @@ import * as Yup from 'yup';
 
 import useAuth from '../../../hooks/useAuth';
 import { getProvinciasApi } from '../../../api/provincia';
-import { createAddressApi } from '../../../api/address';
+import { createAddressApi, updateAddressApi } from '../../../api/address';
 import { toast } from 'react-toastify';
 
 const AddressForm = (props) => {
-   const { setShowModal, setReloadAddresses } = props;
+   const { setShowModal, setReloadAddresses, isNewAddress, address } = props;
    const [loading, setLoading] = useState(false);
    const [provincias, setProvincias] = useState([
       { key: '', text: '', value: '' },
@@ -18,10 +18,10 @@ const AddressForm = (props) => {
    const { auth, logout } = useAuth();
 
    const formik = useFormik({
-      initialValues: initialValues(),
+      initialValues: initialValues(address),
       validationSchema: Yup.object(validationSchema()),
       onSubmit: (formData) => {
-         createAddress(formData);
+         isNewAddress ? createAddress(formData) : updateAddress(formData);
       },
    });
 
@@ -48,16 +48,34 @@ const AddressForm = (props) => {
       setLoading(false);
    };
 
+   const updateAddress = async (formData) => {
+      setLoading(true);
+      const formDataTemp = {
+         ...formData,
+         id_user: auth.idUser,
+      };
+
+      const response = await updateAddressApi(address.id, formDataTemp, logout);
+      if (!response) {
+         toast.warning('Error al guardar la dirección');
+         setLoading(false);
+      } else {
+         formik.resetForm();
+         setLoading(false);
+         setReloadAddresses(true);
+         setShowModal(false);
+      }
+      setLoading(false);
+   };
+
    const handleChangeProvincia = (event, { value }) => {
       formik.values.id_provincia = value;
-      formik.errors.id_provincia = false;
       formik.validateForm();
    };
 
    useEffect(() => {
       (async () => {
          const response = await getProvinciasApi(logout);
-
          const provinciasMap = response.map((provincia) => {
             return {
                key: provincia.id,
@@ -120,6 +138,7 @@ const AddressForm = (props) => {
                options={provincias}
                onChange={handleChangeProvincia}
                error={formik.errors.id_provincia}
+               value={formik.values.id_provincia}
             />
          </Form.Group>
 
@@ -146,7 +165,7 @@ const AddressForm = (props) => {
 
          <div className='actions'>
             <Button className='submit' type='submit' loading={loading}>
-               Guardar
+               {isNewAddress ? 'Guardar' : 'Actualizar'}
             </Button>
          </div>
       </Form>
@@ -155,15 +174,15 @@ const AddressForm = (props) => {
 
 export default AddressForm;
 
-const initialValues = () => {
+const initialValues = (address) => {
    return {
-      title: '',
-      name: '',
-      address: '',
-      city: '',
-      id_provincia: '',
-      postalCode: '',
-      phone: '',
+      title: address?.title || '',
+      name: address?.name || '',
+      address: address?.address || '',
+      city: address?.city || '',
+      id_provincia: address?.id_provincia.id || '',
+      postalCode: address?.postalCode || '',
+      phone: address?.phone || '',
    };
 };
 

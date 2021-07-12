@@ -50,3 +50,21 @@ export const deleteAddressApi = async (idAddress, logout) => {
       return null;
    }
 };
+
+export const updateAddressApi = async (idAddress, address, logout) => {
+   try {
+      const url = `${process.env.NEXT_PUBLIC_BASE_PATH}/addresses/${idAddress}`;
+      const params = {
+         method: 'PUT',
+         headers: {
+            'Content-Type': 'application/json',
+         },
+         body: JSON.stringify(address),
+      };
+      const result = await authFetch(url, params, logout);
+      return result;
+   } catch (error) {
+      console.error(error);
+      return null;
+   }
+};
