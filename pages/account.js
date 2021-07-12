@@ -6,6 +6,7 @@ import ChangeNameForm from '../components/Account/ChangeNameForm';
 import ChangeEmailForm from '../components/Account/ChangeEmailForm';
 import ChangePasswordForm from '../components/Account/ChangePasswordForm';
 import AddressForm from '../components/Account/AddressForm';
+import ListAddress from '../components/Account/ListAddress';
 import BasicModal from '../components/Modal/BasicModal';
 import useAuth from '../hooks/useAuth';
 import { getMeApi } from '../api/user';
@@ -77,7 +78,7 @@ const Addresses = () => {
 
    const openModal = (title) => {
       setTitleModal(title);
-      setFormModal(<AddressForm />);
+      setFormModal(<AddressForm setShowModal={setShowModal} />);
       setShowModal(true);
    };
 
@@ -92,7 +93,7 @@ const Addresses = () => {
             />
          </div>
          <div className='data'>
-            <p>Lista de Direccciones</p>
+            <ListAddress />
          </div>
          <BasicModal show={showModal} setShow={setShowModal} title={titleModal}>
             {formModal}

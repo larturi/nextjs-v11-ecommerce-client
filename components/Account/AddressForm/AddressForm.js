@@ -4,26 +4,53 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import useAuth from '../../../hooks/useAuth';
-import { getProvinciasApi } from '../../../api/provincias';
+import { getProvinciasApi } from '../../../api/provincia';
+import { createAddressApi } from '../../../api/address';
+import { toast } from 'react-toastify';
 
-const AddressForm = () => {
+const AddressForm = (props) => {
+   const { setShowModal } = props;
+   const [loading, setLoading] = useState(false);
    const [provincias, setProvincias] = useState([
       { key: '', text: '', value: '' },
    ]);
 
-   const { logout } = useAuth();
+   const { auth, logout } = useAuth();
 
    const formik = useFormik({
       initialValues: initialValues(),
-      mapPropsToValues: () => ({ state: '' }),
       validationSchema: Yup.object(validationSchema()),
       onSubmit: (formData) => {
-         console.log(formData);
+         createAddress(formData);
       },
    });
 
+   const createAddress = async (formData) => {
+      setLoading(true);
+
+      const formDataTemp = {
+         ...formData,
+         id_user: auth.idUser,
+      };
+
+      const response = await createAddressApi(formDataTemp, logout);
+
+      if (!response) {
+         toast.warning('Error al guardar la dirección');
+         setLoading(false);
+      } else {
+         formik.resetForm();
+         setLoading(false);
+         setShowModal(false);
+      }
+
+      setLoading(false);
+   };
+
    const handleChangeProvincia = (event, { value }) => {
-      formik.values.state = value;
+      formik.values.id_provincia = value;
+      formik.errors.id_provincia = false;
+      formik.validateForm();
    };
 
    useEffect(() => {
@@ -85,13 +112,13 @@ const AddressForm = () => {
                error={formik.errors.city}
             />
             <Form.Dropdown
-               name='state'
+               name='id_provincia'
                placeholder='Provincia/Estado'
                label='Provincia/Estado'
                selection
                options={provincias}
                onChange={handleChangeProvincia}
-               error={formik.errors.state}
+               error={formik.errors.id_provincia}
             />
          </Form.Group>
 
@@ -117,7 +144,7 @@ const AddressForm = () => {
          </Form.Group>
 
          <div className='actions'>
-            <Button className='submit' type='submit'>
+            <Button className='submit' type='submit' loading={loading}>
                Guardar
             </Button>
          </div>
@@ -133,7 +160,7 @@ const initialValues = () => {
       name: '',
       address: '',
       city: '',
-      state: '',
+      id_provincia: '',
       postalCode: '',
       phone: '',
    };
@@ -145,7 +172,7 @@ const validationSchema = () => {
       name: Yup.string().required(true),
       address: Yup.string().required(true),
       city: Yup.string().required(true),
-      state: Yup.string().required(true),
+      id_provincia: Yup.number().required(true),
       postalCode: Yup.string().required(true),
       phone: Yup.string().required(true),
    };
