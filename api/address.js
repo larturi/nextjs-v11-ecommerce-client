@@ -28,3 +28,25 @@ export const getAddressApi = async (idUser, logout) => {
       return null;
    }
 };
+
+export const deleteAddressApi = async (idAddress, logout) => {
+   try {
+      const url = `${process.env.NEXT_PUBLIC_BASE_PATH}/addresses/${idAddress}`;
+
+      const params = {
+         method: 'DELETE',
+         headers: {
+            'Content-Type': 'application/json',
+         },
+      };
+
+      const result = await authFetch(url, params, logout);
+
+      if (result.statusCode === 500)
+         throw new Error('Error al intentar eliminar el domicilio');
+      return true;
+   } catch (error) {
+      console.error(error);
+      return null;
+   }
+};

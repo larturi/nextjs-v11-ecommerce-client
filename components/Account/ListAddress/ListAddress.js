@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { getAddressApi } from '../../../api/address';
+import { getAddressApi, deleteAddressApi } from '../../../api/address';
 import { Grid, Button } from 'semantic-ui-react';
 import useAuth from '../../../hooks/useAuth';
 import { map, size } from 'lodash';
 
-const ListAddress = () => {
+const ListAddress = (props) => {
    const [addresses, setAddresses] = useState([]);
    const { auth, logout } = useAuth();
+   const { reloadAddresses, setReloadAddresses } = props;
 
    useEffect(() => {
       (async () => {
          const response = await getAddressApi(auth.idUser, logout);
          setAddresses(response || []);
+         setReloadAddresses(false);
       })();
-   }, []);
+   }, [reloadAddresses]);
+
+   if (!addresses) return null;
+
    return (
       <div className='list-address'>
          {size(addresses) === 0 ? (
@@ -27,7 +32,11 @@ const ListAddress = () => {
                      tablet={8}
                      computer={4}
                   >
-                     <Address address={address} />
+                     <Address
+                        address={address}
+                        logout={logout}
+                        setReloadAddresses={setReloadAddresses}
+                     />
                   </Grid.Column>
                ))}
             </Grid>
@@ -39,7 +48,19 @@ const ListAddress = () => {
 export default ListAddress;
 
 const Address = (props) => {
-   const { address } = props;
+   const { address, logout, setReloadAddresses } = props;
+
+   const [loadingDelete, setLoadingDelete] = useState(false);
+
+   const deleteAddress = async () => {
+      setLoadingDelete(true);
+      const response = await deleteAddressApi(address.id, logout);
+      if (response) {
+         setReloadAddresses(true);
+      }
+      setLoadingDelete(false);
+   };
+
    return (
       <div className='address'>
          <p>{address.title}</p>
@@ -52,7 +73,9 @@ const Address = (props) => {
 
          <div className='actions'>
             <Button primary>Editar</Button>
-            <Button>Eliminar</Button>
+            <Button onClick={deleteAddress} loading={loadingDelete}>
+               Eliminar
+            </Button>
          </div>
       </div>
    );

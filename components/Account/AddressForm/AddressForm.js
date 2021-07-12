@@ -9,7 +9,7 @@ import { createAddressApi } from '../../../api/address';
 import { toast } from 'react-toastify';
 
 const AddressForm = (props) => {
-   const { setShowModal } = props;
+   const { setShowModal, setReloadAddresses } = props;
    const [loading, setLoading] = useState(false);
    const [provincias, setProvincias] = useState([
       { key: '', text: '', value: '' },
@@ -41,6 +41,7 @@ const AddressForm = (props) => {
       } else {
          formik.resetForm();
          setLoading(false);
+         setReloadAddresses(true);
          setShowModal(false);
       }
 
