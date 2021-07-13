@@ -6,6 +6,8 @@ import { useRouter } from 'next/router';
 import '../scss/global.scss';
 import 'semantic-ui-css/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 import AuthContext from '../context/authContext';
 import { getToken, setToken, removeToken } from '../api/token';

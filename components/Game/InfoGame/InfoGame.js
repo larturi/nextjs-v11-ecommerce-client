@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactPlayer from 'react-player/lazy';
+import CarouselScreens from '../CarouselScreens/CarouselScreens';
 
 const InfoGame = (props) => {
    const { game } = props;
@@ -10,6 +11,7 @@ const InfoGame = (props) => {
             url={game.video}
             controls={true}
          />
+         <CarouselScreens title={game.title} screenshots={game.screenshots} />
       </div>
    );
 };
