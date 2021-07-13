@@ -38,3 +38,15 @@ export const getTotalGamesPlatformApi = async (platform) => {
       return null;
    }
 };
+
+export const getGameByUrlApi = async (urlGame) => {
+   try {
+      const url = `${process.env.NEXT_PUBLIC_BASE_PATH}/games?url=${urlGame}`;
+      const response = await fetch(url);
+      const game = await response.json();
+      return game[0];
+   } catch (error) {
+      console.error(error);
+      return null;
+   }
+};
