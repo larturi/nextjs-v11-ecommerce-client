@@ -57,8 +57,6 @@ const AddressForm = (props) => {
 
       const response = await updateAddressApi(address.id, formDataTemp, logout);
 
-      console.log(response);
-
       if (!response) {
          toast.warning('Error al guardar la dirección');
          setLoading(false);
