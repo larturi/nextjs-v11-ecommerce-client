@@ -55,7 +55,7 @@ const Game = (props) => {
                      ) : (
                         <span />
                      )}
-                     <span className='price'>{game.price}€</span>
+                     <span className='price'>{game.price}$</span>
                   </div>
                </div>
                <h2>{game.title}</h2>
