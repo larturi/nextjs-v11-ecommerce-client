@@ -1,5 +1,5 @@
-import React from 'react';
-import { Image } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Image, Modal } from 'semantic-ui-react';
 import Slider from 'react-slick';
 import { map } from 'lodash';
 
@@ -15,19 +15,34 @@ const settings = {
 const CarouselScreens = (props) => {
    const { title, screenshots } = props;
 
-   console.log(screenshots);
+   const [showModal, setShowModal] = useState(false);
+   const [urlImage, setUrlImage] = useState(null);
+
+   const openImage = (url) => {
+      setUrlImage(url);
+      setShowModal(true);
+   };
 
    return (
-      <Slider {...settings}>
-         {map(screenshots, (screenshot) => (
-            <Image
-               key={screenshot.id}
-               src={screenshot.url}
-               alt={screenshot.name}
-               onClick={() => console.log('Abira imagen')}
-            />
-         ))}
-      </Slider>
+      <>
+         <Slider {...settings}>
+            {map(screenshots, (screenshot) => (
+               <Image
+                  key={screenshot.id}
+                  src={screenshot.url}
+                  alt={screenshot.name}
+                  onClick={() => openImage(screenshot.url)}
+               />
+            ))}
+         </Slider>
+         <Modal
+            open={showModal}
+            onClose={() => setShowModal(false)}
+            size='large'
+         >
+            <Image src={urlImage} alt={title} />
+         </Modal>
+      </>
    );
 };
 
