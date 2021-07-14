@@ -50,3 +50,14 @@ export const getGameByUrlApi = async (urlGame) => {
       return null;
    }
 };
+
+export const searchGamesApi = async (title) => {
+   try {
+      const url = `${process.env.NEXT_PUBLIC_BASE_PATH}/games?_q=${title}`;
+      const response = await fetch(url);
+      return await response.json();
+   } catch (error) {
+      console.error(error);
+      return null;
+   }
+};
