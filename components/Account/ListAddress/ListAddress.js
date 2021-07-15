@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAddressApi, deleteAddressApi } from '../../../api/address';
+import { getAddressesApi, deleteAddressApi } from '../../../api/address';
 import { Grid, Button } from 'semantic-ui-react';
 import useAuth from '../../../hooks/useAuth';
 import { map, size } from 'lodash';
@@ -12,10 +12,11 @@ const ListAddress = (props) => {
 
    useEffect(() => {
       (async () => {
-         const response = await getAddressApi(auth.idUser, logout);
+         const response = await getAddressesApi(auth.idUser, logout);
          setAddresses(response || []);
          setReloadAddresses(false);
       })();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [reloadAddresses]);
 
    if (!addresses) return null;

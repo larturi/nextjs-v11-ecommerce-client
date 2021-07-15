@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import BasicLayout from '../layouts/BasicLayout';
 import { getGameByUrlApi } from '../api/game';
 import SummaryCart from '../components/Cart/SummaryCart';
+import AddressShipping from '../components/Cart/AddressShipping';
 import useCart from '../hooks/useCart';
 
 const Cart = () => {
@@ -22,6 +23,7 @@ const EmptyCart = () => {
 
 const FullCart = ({ products }) => {
    const [productsData, setProductsData] = useState(null);
+   const [address, setAddress] = useState(null);
 
    useEffect(() => {
       (async () => {
@@ -37,6 +39,7 @@ const FullCart = ({ products }) => {
    return (
       <BasicLayout>
          <SummaryCart products={productsData} />
+         <AddressShipping setAddress={setAddress} />
       </BasicLayout>
    );
 };

@@ -18,7 +18,7 @@ export const createAddressApi = async (address, logout) => {
    }
 };
 
-export const getAddressApi = async (idUser, logout) => {
+export const getAddressesApi = async (idUser, logout) => {
    try {
       const url = `${process.env.NEXT_PUBLIC_BASE_PATH}/addresses?id_user=${idUser}`;
       const result = await authFetch(url, null, logout);

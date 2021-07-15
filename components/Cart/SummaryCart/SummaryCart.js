@@ -23,7 +23,7 @@ const SummaryCart = ({ products }) => {
       <div className='summary-cart'>
          <div className='title'>Resumen del carrito</div>
          <div className='data'>
-            <Table celled structured>
+            <Table structured>
                <Table.Header>
                   <Table.Row>
                      <Table.HeaderCell>Producto</Table.HeaderCell>
