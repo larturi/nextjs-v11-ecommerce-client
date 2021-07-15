@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Image, Icon, Button } from 'semantic-ui-react';
 import { size } from 'lodash';
 import useAuth from '../../../hooks/useAuth';
+import useCart from '../../../hooks/useCart';
 import classNames from 'classnames';
 import {
    isFavoriteApi,
@@ -30,9 +31,10 @@ export default HeaderGame;
 
 const InfoGame = (props) => {
    const { game } = props;
-   const { title, summary, price, discount } = game;
+   const { title, summary, price, discount, url } = game;
 
    const { auth, logout } = useAuth();
+   const { addProductCart } = useCart();
 
    const [isFavorite, setIsFavorite] = useState(false);
    const [reloadFavorite, setReloadFavorite] = useState(false);
@@ -99,7 +101,12 @@ const InfoGame = (props) => {
                   </p>
                </div>
             </div>
-            <Button className='header-game__buy-btn'>Comprar</Button>
+            <Button
+               className='header-game__buy-btn'
+               onClick={() => addProductCart(url)}
+            >
+               Comprar
+            </Button>
          </div>
       </>
    );

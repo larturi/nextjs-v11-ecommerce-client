@@ -1,4 +1,4 @@
-import { TOKEN } from '../utils/constats';
+import { TOKEN, CART } from '../utils/constats';
 import jwtDecode from 'jwt-decode';
 
 export const setToken = (token) => {
@@ -12,6 +12,10 @@ export const getToken = () => {
 
 export const removeToken = () => {
    return localStorage.removeItem(TOKEN);
+};
+
+export const removeCart = () => {
+   return localStorage.removeItem(CART);
 };
 
 export const hasExpiredToken = (token) => {

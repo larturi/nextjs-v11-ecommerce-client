@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import jwtDecode from 'jwt-decode';
 import { useRouter } from 'next/router';
 
@@ -12,11 +12,20 @@ import 'slick-carousel/slick/slick-theme.css';
 import AuthContext from '../context/AuthContext';
 import CartContext from '../context/CartContext';
 
-import { getToken, setToken, removeToken } from '../api/token';
+import {
+   getProductsCart,
+   addProductCart,
+   countProductsCart,
+   removeProductCart,
+} from '../api/cart';
+
+import { getToken, setToken, removeToken, removeCart } from '../api/token';
 
 export default function MyApp({ Component, pageProps }) {
    const [auth, setAuth] = useState(undefined);
    const [reloadUser, setReloadUser] = useState(false);
+   const [totalProductsCart, setTotalProductsCart] = useState(0);
+   const [reloadCartCounter, setReloadCartCounter] = useState(false);
    const router = useRouter();
 
    useEffect(() => {
@@ -33,6 +42,11 @@ export default function MyApp({ Component, pageProps }) {
       setReloadUser(false);
    }, [reloadUser]);
 
+   useEffect(() => {
+      setTotalProductsCart(countProductsCart());
+      setReloadCartCounter(false);
+   }, [reloadCartCounter, auth]);
+
    const login = (token) => {
       setToken(token);
       setAuth({
@@ -44,9 +58,28 @@ export default function MyApp({ Component, pageProps }) {
    const logout = () => {
       if (auth) {
          removeToken();
+         removeCart();
          setAuth(null);
          router.push('/');
       }
+   };
+
+   const addProduct = (product) => {
+      const token = getToken();
+
+      if (token) {
+         addProductCart(product);
+         setReloadCartCounter(true);
+      } else {
+         toast.warning(
+            'Debes autenticarte para poder agregar productos a tu carrito.'
+         );
+      }
+   };
+
+   const removeProduct = (product) => {
+      removeProductCart(product);
+      setReloadCartCounter(true);
    };
 
    const authData = useMemo(
@@ -62,13 +95,14 @@ export default function MyApp({ Component, pageProps }) {
 
    const cartData = useMemo(
       () => ({
-         auth: undefined,
-         login: () => null,
-         logout: () => null,
-         setReloadUser: () => null,
+         productsCartCounter: totalProductsCart,
+         addProductCart: (product) => addProduct(product),
+         getProductsCart,
+         removeProductCart: (product) => removeProduct(product),
+         removeAllProductCart: () => null,
       }),
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      []
+      [totalProductsCart]
    );
 
    if (auth === undefined) return null;
@@ -80,7 +114,7 @@ export default function MyApp({ Component, pageProps }) {
             <ToastContainer
                position='top-right'
                autoClose={5000}
-               hideProgressBar={true}
+               hideProgressBar={false}
                newestOnTop={true}
                closeOnClick={true}
                rtl={false}
