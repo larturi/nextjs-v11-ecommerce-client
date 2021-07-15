@@ -9,7 +9,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import AuthContext from '../context/authContext';
+import AuthContext from '../context/AuthContext';
+import CartContext from '../context/CartContext';
+
 import { getToken, setToken, removeToken } from '../api/token';
 
 export default function MyApp({ Component, pageProps }) {
@@ -58,22 +60,35 @@ export default function MyApp({ Component, pageProps }) {
       [auth]
    );
 
+   const cartData = useMemo(
+      () => ({
+         auth: undefined,
+         login: () => null,
+         logout: () => null,
+         setReloadUser: () => null,
+      }),
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      []
+   );
+
    if (auth === undefined) return null;
 
    return (
       <AuthContext.Provider value={authData}>
-         <Component {...pageProps} />
-         <ToastContainer
-            position='top-right'
-            autoClose={5000}
-            hideProgressBar={true}
-            newestOnTop={true}
-            closeOnClick={true}
-            rtl={false}
-            pauseOnFocusLoss={false}
-            draggable={true}
-            pauseOnHover={true}
-         />
+         <CartContext.Provider value={cartData}>
+            <Component {...pageProps} />
+            <ToastContainer
+               position='top-right'
+               autoClose={5000}
+               hideProgressBar={true}
+               newestOnTop={true}
+               closeOnClick={true}
+               rtl={false}
+               pauseOnFocusLoss={false}
+               draggable={true}
+               pauseOnHover={true}
+            />
+         </CartContext.Provider>
       </AuthContext.Provider>
    );
 }

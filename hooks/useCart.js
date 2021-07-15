@@ -1,0 +1,8 @@
+/* eslint-disable import/no-anonymous-default-export */
+
+import { useContext } from 'react';
+import CartContext from '../context/CartContext';
+
+const useCart = () => useContext(CartContext);
+
+export default useCart;

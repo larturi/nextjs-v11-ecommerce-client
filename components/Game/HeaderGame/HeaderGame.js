@@ -51,15 +51,22 @@ const InfoGame = (props) => {
 
    useEffect(() => {
       (async () => {
-         const isFavorite = await isFavoriteApi(auth.idUser, game.id, logout);
-         if (size(isFavorite) > 0) {
-            setIsFavorite(true);
-         } else {
-            setIsFavorite(false);
+         if (auth) {
+            const isFavorite = await isFavoriteApi(
+               auth.idUser,
+               game.id,
+               logout
+            );
+            if (size(isFavorite) > 0) {
+               setIsFavorite(true);
+            } else {
+               setIsFavorite(false);
+            }
+            setReloadFavorite(false);
          }
-         setReloadFavorite(false);
       })();
-   }, [auth.idUser, game.id, logout, reloadFavorite]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [game.id, logout, reloadFavorite]);
 
    return (
       <>
