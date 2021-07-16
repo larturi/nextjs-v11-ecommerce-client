@@ -33,7 +33,9 @@ const Whishlist = () => {
                {favorites && size(favorites) === 0 && (
                   <h3>No tienes juegos marcados como favoritos</h3>
                )}
-               {size(favorites) > 0 && <Games games={favorites} />}
+               {size(favorites) > 0 && (
+                  <Games games={favorites} addCartButton={true} />
+               )}
             </div>
          </div>
       </BasicLayout>

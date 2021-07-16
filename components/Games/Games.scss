@@ -20,6 +20,10 @@
       padding: 0 10px;
     }
 
+    &-add-cart {
+      margin-top: 8px;
+    }
+
     &-poster {
       position: relative;
 
@@ -49,5 +53,20 @@
         }
       }
     }
+  }
+}
+
+.add-cart {
+  width: 100%;
+
+  background: $primary !important;
+
+  &__text {
+    color: $font-light;
+  }
+
+  &__icon {
+    margin-left: 5px !important;
+    color: $font-light;
   }
 }

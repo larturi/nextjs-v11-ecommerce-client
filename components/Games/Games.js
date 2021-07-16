@@ -2,7 +2,9 @@ import React from 'react';
 import { Image, Grid } from 'semantic-ui-react';
 import Link from 'next/link';
 import { map } from 'lodash';
+import { Button, Icon } from 'semantic-ui-react';
 import useWindowSize from '../../hooks/useWindowSize';
+import useCart from '../../hooks/useCart';
 import {
    breakpointUpSm,
    breakpointUpMd,
@@ -25,13 +27,18 @@ const Games = (props) => {
       }
    };
 
-   const { games } = props;
+   const { games, addCartButton = false } = props;
+
    return (
       <div className='list-games'>
          <Grid>
             <Grid.Row columns={getColumnsRender()}>
                {map(games, (game) => (
-                  <Game game={game} key={game.id} />
+                  <Game
+                     game={game}
+                     key={game.id}
+                     addCartButton={addCartButton}
+                  />
                ))}
             </Grid.Row>
          </Grid>
@@ -42,7 +49,8 @@ const Games = (props) => {
 export default Games;
 
 const Game = (props) => {
-   const { game } = props;
+   const { game, addCartButton = false } = props;
+   const { addProductCart } = useCart();
    return (
       <Grid.Column className='list-games__game'>
          <Link href={`/${game.url}`}>
@@ -61,6 +69,18 @@ const Game = (props) => {
                <h2>{game.title}</h2>
             </a>
          </Link>
+         {addCartButton && (
+            <div className='list-games__game-add-cart'>
+               <Button
+                  className='add-cart'
+                  type='button'
+                  onClick={() => addProductCart(game.url)}
+               >
+                  <span className='add-cart__text'>COMPRAR</span>
+                  <Icon name='cart' className='add-cart__icon' />
+               </Button>
+            </div>
+         )}
       </Grid.Column>
    );
 };
