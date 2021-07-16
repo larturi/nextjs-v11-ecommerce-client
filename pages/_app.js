@@ -17,6 +17,7 @@ import {
    addProductCart,
    countProductsCart,
    removeProductCart,
+   removeAllProductsCart,
 } from '../api/cart';
 
 import { getToken, setToken, removeToken, removeCart } from '../api/token';
@@ -99,7 +100,7 @@ export default function MyApp({ Component, pageProps }) {
          addProductCart: (product) => addProduct(product),
          getProductsCart,
          removeProductCart: (product) => removeProduct(product),
-         removeAllProductCart: () => null,
+         removeAllProductsCart,
       }),
       // eslint-disable-next-line react-hooks/exhaustive-deps
       [totalProductsCart]
