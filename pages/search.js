@@ -5,6 +5,7 @@ import { Loader } from 'semantic-ui-react';
 import { searchGamesApi } from '../api/game';
 import BasicLayout from '../layouts/BasicLayout';
 import Games from '../components/Games';
+import Seo from '../components/Seo';
 
 const Search = () => {
    const [games, setGames] = useState(null);
@@ -27,6 +28,7 @@ const Search = () => {
 
    return (
       <BasicLayout className='search'>
+         <Seo title={`Buscando: ${query.query}`} />
          {!games && <Loader active>Buscando...</Loader>}
          {games && size(games) === 0 && (
             <div>

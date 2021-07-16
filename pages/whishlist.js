@@ -5,6 +5,7 @@ import { getFavoritesApi } from '../api/favorite';
 import useAuth from '../hooks/useAuth';
 import BasicLayout from '../layouts/BasicLayout';
 import Games from '../components/Games';
+import Seo from '../components/Seo';
 
 const Whishlist = () => {
    const [favorites, setFavorites] = useState(null);
@@ -25,6 +26,8 @@ const Whishlist = () => {
 
    return (
       <BasicLayout className='wishlist'>
+         <Seo title='Favoritos' />
+
          <div className='wishlist__block'>
             <div className='title'>Lista de desesos</div>
 

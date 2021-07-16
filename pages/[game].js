@@ -6,6 +6,7 @@ import BasiLayout from '../layouts/BasicLayout';
 import HeaderGame from '../components/Game/HeaderGame';
 import TabsGame from '../components/Game/TabsGame';
 import { getGameByUrlApi } from '../api/game';
+import Seo from '../components/Seo';
 
 const Game = () => {
    const { query } = useRouter();
@@ -22,6 +23,7 @@ const Game = () => {
 
    return (
       <BasiLayout>
+         <Seo title={game.title} description={game.description} />
          <HeaderGame game={game} />
          <TabsGame game={game} />
       </BasiLayout>

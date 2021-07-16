@@ -10,6 +10,7 @@ import ListAddress from '../components/Account/ListAddress';
 import BasicModal from '../components/Modal/BasicModal';
 import useAuth from '../hooks/useAuth';
 import { getMeApi } from '../api/user';
+import Seo from '../components/Seo';
 
 const Account = () => {
    const router = useRouter();
@@ -32,6 +33,7 @@ const Account = () => {
 
    return (
       <BasicLayout className='account'>
+         <Seo title='Configuración' />
          <Configuration
             user={user}
             logout={logout}
