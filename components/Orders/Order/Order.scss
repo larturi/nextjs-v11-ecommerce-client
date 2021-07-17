@@ -19,6 +19,10 @@
         .ui.image {
           height: 100%;
           margin-right: 20px;
+
+          @media only screen and (max-width: 767px) {
+            min-width: 52px !important;
+          }
         }
       }
   
@@ -54,5 +58,19 @@
         padding-left: 20px;
         color: $primary;
       }
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .tituloGame {
+      font-size: 10px;
+    }
+
+    .precioGame {
+      font-size: 14px;
+    }
+
+    .order__other-date {
+      font-size: 12px;
     }
   }

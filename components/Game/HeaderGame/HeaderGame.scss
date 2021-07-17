@@ -50,6 +50,10 @@
         padding: 15px 20px;
         margin-top: 15px;
 
+        @media only screen and (max-width: 767px) {
+            display: block  !important;
+        }
+
         &-price {
             display: flex;
             flex-direction: column;
@@ -107,6 +111,13 @@
                 background-color: $primary;
                 content: "";
             }
+
+            @media only screen and (max-width: 767px) {
+                margin-left: 15px;
+                margin-top: 8px !important;
+            }
+
+            
         }
     }
 }

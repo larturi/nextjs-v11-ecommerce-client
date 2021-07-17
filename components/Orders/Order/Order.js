@@ -23,16 +23,16 @@ const Order = (props) => {
                      </a>
                   </Link>
                   <div>
-                     <h2>{title}</h2>
-                     <p>{totalPayment} </p>
+                     <h2 className='tituloGame'>{title}</h2>
+                     <p className='precioGame'>${totalPayment} </p>
+                     <p className='order__other-date'>
+                        {moment(created_at).format('L')} -{' '}
+                        {moment(created_at).format('LT')}
+                     </p>
                   </div>
                </div>
             </div>
             <div className='order__other'>
-               <p className='order__other-date'>
-                  {moment(created_at).format('L')} -{' '}
-                  {moment(created_at).format('LT')}
-               </p>
                <Icon
                   name='eye'
                   circular

@@ -129,7 +129,7 @@ const MenuOptionsUser = (props) => {
          ) : (
             <Menu.Item onClick={onShowModal}>
                <Icon name='user outline' />
-               Mi Cuenta
+               <span className='miCuentaLabel'>Mi Cuenta</span>
             </Menu.Item>
          )}
       </Menu>

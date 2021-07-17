@@ -70,3 +70,20 @@
     color: $font-light;
   }
 }
+
+.list-games__game-poster img.ui.image {
+  min-height: 260px !important;
+}
+
+
+@media only screen and (max-width: 767px) {
+
+  .ui.button.add-cart {
+      font-size: 12px;
+  }
+
+  .list-games__game-poster img.ui.image {
+    min-height: 180px !important;
+  }
+  
+}
