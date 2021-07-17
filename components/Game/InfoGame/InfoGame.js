@@ -7,7 +7,7 @@ import CarouselScreens from '../CarouselScreens/CarouselScreens';
 const InfoGame = (props) => {
    const { game } = props;
    return (
-      <div className='info-game'>
+      <div className='info-game player-wrapper'>
          <ReactPlayer
             className='info-game__video'
             url={game.video}

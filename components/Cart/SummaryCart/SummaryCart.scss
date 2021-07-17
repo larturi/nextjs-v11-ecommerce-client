@@ -26,6 +26,13 @@
           img {
             height: 100px;
             padding-right: 20px;
+
+            @media only screen and (max-width: 767px) {
+              margin: 0 auto;
+              padding-right: 0 !important;
+              margin-top: 10px !important;
+              margin-bottom: 10px !important;
+            }
           }
         }
       }
@@ -48,5 +55,11 @@
         border-bottom: 1px solid $border-light !important;
         border-left: 1px solid $border-light !important;
       }
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    thead {
+      display: none !important;
     }
   }
