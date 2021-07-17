@@ -18,6 +18,10 @@
     margin: 0;
 }
 
+.uppercase {
+    text-transform: uppercase;
+}
+
 @media only screen and (max-width: 767px) {
 
     .top-bar__right .ui.input input {

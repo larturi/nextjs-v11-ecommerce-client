@@ -59,19 +59,19 @@ const LoginForm = (props) => {
          />
 
          <div className='actions'>
-            <Button type='button' basic onClick={showRegisterForm}>
-               Registrarme
-            </Button>
-
             <div>
                <Button className='submit' type='submit' loading={loading}>
-                  Login
+                  Ingresar
                </Button>
 
                <Button type='button' onClick={resetPassword}>
                   ¿Olvidaste la contraseña?
                </Button>
             </div>
+
+            <Button type='button' basic onClick={showRegisterForm}>
+               Registrarme
+            </Button>
          </div>
       </Form>
    );

@@ -65,11 +65,11 @@ const AddressModal = (props) => {
       >
          <h3>El pedido se ha enviado a la siguiente dirección:</h3>
          <div>
-            <p>{addressShipping.name}</p>
-            <p>{addressShipping.address}</p>
-            <p>
-               {addressShipping.state}, {addressShipping.city}{' '}
-               {addressShipping.postalCode}
+            <p className='uppercase'>{addressShipping.name}</p>
+            <p className='uppercase'>{addressShipping.address}</p>
+            <p className='uppercase'>
+               {addressShipping.id_provincia.nombre} (
+               {addressShipping.postalCode})
             </p>
             <p>{addressShipping.phone}</p>
          </div>

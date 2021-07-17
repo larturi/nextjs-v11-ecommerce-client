@@ -11,3 +11,20 @@
         }
     }
 }
+
+@media only screen and (max-width: 767px) {
+
+    .actions {
+        display: block !important;
+    }
+
+    .ui.button, .ui.button.submit {
+        display: block !important;
+        width: 100% !important;
+        margin-top: 8px !important;
+    }
+
+}
+
+
+

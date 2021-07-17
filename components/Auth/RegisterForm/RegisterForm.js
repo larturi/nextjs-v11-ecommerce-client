@@ -71,11 +71,16 @@ const RegisterForm = (props) => {
          />
 
          <div className='actions'>
+            <Button
+               type='submit'
+               className='submit registerBtn'
+               loading={loading}
+            >
+               Registrar
+            </Button>
+
             <Button type='button' basic onClick={showLoginForm}>
                Iniciar Sesión
-            </Button>
-            <Button type='submit' className='submit' loading={loading}>
-               Registrar
             </Button>
          </div>
       </Form>
