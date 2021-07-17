@@ -1,3 +1,5 @@
 module.exports = {
-  reactStrictMode: false,
+   reactStrictMode: false,
+   basePath: '/ecommerce-games',
+   trailingSlash: true,
 };

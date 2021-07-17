@@ -24,7 +24,11 @@ const Logo = () => {
    return (
       <Link href='/'>
          <a>
-            <Image src='/logo.png' alt='logo' className='logo' />
+            <Image
+               src='https://games-ecommerce-s3.s3.sa-east-1.amazonaws.com/logo_7bf36aaa55.png?12329.300000011921'
+               alt='logo'
+               className='logo'
+            />
          </a>
       </Link>
    );
