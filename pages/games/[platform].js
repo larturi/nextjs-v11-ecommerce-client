@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { Loader } from 'semantic-ui-react';
 import { size } from 'lodash';
 import BasicLayout from '../../layouts/BasicLayout';
+import { getPlatformApi } from '../../api/platform';
 import { getGamesPlatformApi, getTotalGamesPlatformApi } from '../../api/game';
 import Games from '../../components/Games';
 import Pagination from '../../components/Pagination';
@@ -70,3 +71,22 @@ const Platform = () => {
 };
 
 export default Platform;
+
+export const getStaticPaths = async () => {
+   const platforms = await getPlatformApi();
+
+   const paths = platforms.map((platform) => ({
+      params: { platform: platform.url },
+   }));
+
+   return {
+      paths,
+      fallback: false,
+   };
+};
+
+export const getStaticProps = async (context) => {
+   const platformId = context.params?.id || '';
+   const platform = { id: platformId };
+   return { props: { platform } };
+};
