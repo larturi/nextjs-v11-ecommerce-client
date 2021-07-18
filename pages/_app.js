@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useMemo, useState, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import jwtDecode from 'jwt-decode';
@@ -90,7 +91,6 @@ export default function MyApp({ Component, pageProps }) {
          logout,
          setReloadUser,
       }),
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       [auth]
    );
 
@@ -102,7 +102,6 @@ export default function MyApp({ Component, pageProps }) {
          removeProductCart: (product) => removeProduct(product),
          removeAllProductsCart,
       }),
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       [totalProductsCart]
    );
 
