@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'semantic-ui-react';
 import { useFormik } from 'formik';
