@@ -26,7 +26,7 @@ const Logo = () => {
       <Link href='/'>
          <a>
             <Image
-               src='https://games-ecommerce-s3.s3.sa-east-1.amazonaws.com/logo_7bf36aaa55.png?12329.300000011921'
+               src='https://res.cloudinary.com/dcnlp5ojh/image/upload/v1667150034/ecommerce-games/logo_244ff8d652.png'
                alt='logo'
                className='logo'
             />
